@@ -1,7 +1,16 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
+import { Fragment } from 'react';
+import { Provider } from 'react-redux';
+import store from '../store';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <Fragment>
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </Fragment>
+  );
 }
 
-export default MyApp
+export default MyApp;

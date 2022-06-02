@@ -1,0 +1,41 @@
+.movement {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movement h3 {
+  font-weight: 400;
+}
+
+.movement p {
+  display: inline;
+}
+
+.movement .type_time {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.type_time p {
+  font-size: 0.8rem;
+  margin: 3px;
+}
+
+.type_time .time {
+  margin-top: 5px;
+}
+
+.deposit,
+.withdraw {
+  background-image: linear-gradient(to top left, #39b385, #9be15d);
+  border-radius: 50px;
+  font-weight: 500;
+  padding: 0px 10px;
+  color: #fff;
+}
+
+.withdraw {
+  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+}

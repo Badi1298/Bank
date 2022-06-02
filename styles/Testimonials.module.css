@@ -1,0 +1,97 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.testimonial::before {
+  content: '“';
+  position: absolute;
+  top: -20%;
+  left: 7%;
+  font-family: inherit;
+  font-size: 12rem;
+  color: var(--color-primary);
+}
+
+.testimonials {
+  height: 30rem;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial {
+  position: absolute;
+  padding: 0 10rem;
+  height: 370px;
+  top: 0%;
+  left: 0%;
+  transition: transform 0.7s cubic-bezier(0.86, 0, 0.3, 1);
+}
+
+.testimonial h2 {
+  font-weight: 500;
+}
+
+.testimonial p {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.4px;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 5%;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.personalInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.personalInfo h3 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.personalInfo p {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.container button {
+  display: inline-block;
+  border: none;
+  background-color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-family: inherit;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.container button.next {
+  position: absolute;
+  right: -5%;
+  top: 30%;
+}
+
+.container button.prev {
+  position: absolute;
+  left: -5%;
+  top: 30%;
+}

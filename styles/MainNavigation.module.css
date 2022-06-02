@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style-type: none;
+  margin-right: 6rem;
+  margin-top: 1.7rem;
+}
+
+.list li {
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.list li:hover {
+  opacity: 0.7;
+}
+
+.account_button {
+  border: none;
+  background-color: var(--color-primary);
+  padding: 0.7rem 1.7rem;
+  border-radius: 100px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.logo {
+  margin-left: 5.6rem;
+  margin-top: 1.4rem;
+  cursor: pointer;
+}

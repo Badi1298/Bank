@@ -1,0 +1,52 @@
+.section {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.outer-container {
+  width: 1000px;
+  margin: auto;
+  background-color: #fff;
+  margin-bottom: 7rem;
+}
+
+.number {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-right: 0.3rem;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+}
+
+.tabs button {
+  border: none;
+  width: 250px;
+  height: 50px;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  margin: 0 1rem;
+  transition: all 0.3s ease-out;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.transfer {
+  background-color: var(--color-secondary);
+}
+
+.loan {
+  background-color: var(--color-primary);
+}
+
+.close {
+  background-color: var(--color-tertiary);
+}
+
+button.active {
+  transform: translateY(-70%);
+}

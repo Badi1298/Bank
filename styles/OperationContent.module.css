@@ -1,0 +1,53 @@
+.container {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 4rem;
+  padding: 2rem 4rem;
+}
+
+.icon1,
+.icon2,
+.icon3 {
+  background-color: var(--color-secondary-opacity);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon1 svg,
+.icon2 svg,
+.icon3 svg {
+  width: 25px;
+  height: 25px;
+  fill: #ffcb03;
+}
+
+.icon2 {
+  background-color: var(--color-primary-opacity);
+}
+
+.icon2 svg {
+  fill: var(--color-primary);
+}
+
+.icon3 {
+  background-color: var(--color-tertiary-opacity);
+}
+
+.icon3 svg {
+  fill: var(--color-tertiary);
+}
+
+.content h2 {
+  font-weight: 500;
+}
+
+.content p {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.4px;
+}

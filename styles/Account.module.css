@@ -1,0 +1,115 @@
+.control_group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+}
+
+.form_control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form_control input {
+  width: 70%;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0 5px;
+}
+
+.form_control label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+  font-weight: 500;
+  transform: translateX(-127px);
+}
+
+.form_control:nth-child(3) label {
+  transform: translateX(-157px);
+}
+
+.close_modal {
+  border: none;
+  font-family: inherit;
+  font-size: 2.5rem;
+  background-color: transparent;
+  position: absolute;
+  right: 2%;
+  top: 0;
+  cursor: pointer;
+}
+
+.form_control.invalid input {
+  border: 1px solid #b40e0e;
+}
+
+.form_control.invalid label {
+  color: #b40e0e;
+}
+
+.form_control.invalid:focus {
+  border-color: #ff8800;
+}
+
+.error_text {
+  color: #b40e0e;
+}
+
+.account_button {
+  border: none;
+  background-color: var(--color-primary);
+  padding: 0.7rem 1.7rem;
+  border-radius: 100px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.account_button.next_step {
+  margin-top: 2rem;
+  width: 50%;
+  align-self: center;
+  font-weight: 500;
+}
+
+.account_button:disabled,
+.account_button:disabled:hover,
+.account_button:disabled:active {
+  background-color: #ccc;
+  color: #333;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.modal_title {
+  font-weight: 600;
+  margin-bottom: 2rem;
+  width: 420px;
+}
+
+.highlight {
+  position: relative;
+  color: #333;
+}
+
+.highlight::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  z-index: -1;
+  background-image: var(--gradient-primary);
+  transform: scale(1.07, 1.05) skewX(-15deg);
+}
+
+.para {
+  margin-top: 2rem;
+}
