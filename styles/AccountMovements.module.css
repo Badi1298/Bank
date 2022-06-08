@@ -28,8 +28,9 @@
 }
 
 .deposit,
-.withdraw {
-  background-image: linear-gradient(to top left, #39b385, #9be15d);
+.withdraw,
+.received {
+  background-image: var(--gradient-primary);
   border-radius: 50px;
   font-weight: 500;
   padding: 0px 10px;
@@ -37,5 +38,9 @@
 }
 
 .withdraw {
-  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  background-image: var(--gradient-tertiary);
+}
+
+.received {
+  background-image: var(--gradient-secondary);
 }

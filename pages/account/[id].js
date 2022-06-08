@@ -1,23 +1,25 @@
 import classes from '../../styles/AccountDetails.module.css';
 
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { MongoClient } from 'mongodb';
+import { useRouter } from 'next/router';
 
 import AccountNavigation from '../../componenets/layout/AccountNavigation';
 import AccountMovements from '../../componenets/main-page/account/AccountMovements';
 import AccountTlc from '../../componenets/main-page/account/AccountTlc';
-
-const interest = 156;
+import AccountBottomInfo from '../../componenets/main-page/account/AccountBottomInfo';
 
 function UserAccount(props) {
+  // Data
   const [sortDescending, setSortDescending] = useState(false);
+  const date = new Date();
 
+  const router = useRouter();
+  const userId = router.query.id;
+
+  props.movementData.reverse();
   const movementsAmounts = props.movementData.map(movement => movement.amount);
-
-  const currentBalance = movementsAmounts.reduce(
-    (acc, movement) => acc + movement,
-    0
-  );
+  const currentBalance = movementsAmounts.reduce((acc, mov) => acc + mov, 0);
   const inMovements = movementsAmounts
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
@@ -26,23 +28,102 @@ function UserAccount(props) {
     .reduce((acc, mov) => acc + mov, 0)
     .toString()
     .slice(1);
+  const sortedMovements = [...props.movementData].sort(
+    (a, b) => b.amount - a.amount
+  );
 
-  const sortedMovements = [...props.movementData];
-  sortedMovements.sort((a, b) => b.amount - a.amount);
+  let transactionNumber = 1;
+  let token = null;
+
+  // Methods
+  useEffect(() => {
+    token = localStorage.getItem('token');
+  }, []);
+
+  const refresh = () => {
+    router.reload();
+  };
+
   const sortHandler = function () {
     setSortDescending(prevState => (prevState = !prevState));
   };
 
-  let transactionNumber = 1;
+  const getEmail = async function () {
+    const res = await fetch(
+      'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyA0-Nt2nWala7-ChK6KdUQr_GRL2qBSRmE',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          idToken: token,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    return data.users[0].email;
+  };
+
+  const addDeposit = async function (amount) {
+    const email = await getEmail();
+
+    const res = await fetch('/api/add-money', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: email,
+        userId: userId,
+        type: 'DEPOSIT',
+        amount: Number(amount),
+        time: 'Today',
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await res.json();
+
+    console.log(data);
+  };
+
+  const transferMoney = async function (toEmail, transferAmount) {
+    const email = await getEmail();
+
+    const res = await fetch('/api/transfer-money', {
+      method: 'POST',
+      body: JSON.stringify({
+        fromEmail: email,
+        fromUserId: userId,
+        toEmail: toEmail,
+        amount: Number(transferAmount),
+        time: 'Today',
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await res.json();
+
+    console.log(data);
+  };
 
   return (
     <Fragment>
-      <AccountNavigation isLoggedIn={true} />
+      <AccountNavigation onAddDeposit={addDeposit} isLoggedIn={true} />
       <div className={classes.container}>
         <div className={classes.general_info}>
           <div>
-            <h2>Current balance</h2>
-            <p>As of 02/06/2022</p>
+            <h2>
+              Current balance{' '}
+              <button onClick={refresh} className={classes.refresh}>
+                ⟳
+              </button>
+            </h2>
+            <p>
+              As of{' '}
+              {`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}
+            </p>
           </div>
           <h1>{currentBalance} USD($)</h1>
         </div>
@@ -70,30 +151,16 @@ function UserAccount(props) {
                   />
                 ))}
           </div>
-          <AccountTlc />
+          <AccountTlc
+            onTransferMoney={transferMoney}
+            onLoanMoney={addDeposit}
+          />
         </div>
-        <div className={classes.bottom_info}>
-          <div className={classes.balance_info}>
-            <div className={classes.in_out_interest}>
-              <div className={classes.balance}>
-                <p>IN</p>
-                <h4>{inMovements}$</h4>
-              </div>
-              <div className={`${classes.balance} ${classes.out}`}>
-                <p>OUT</p>
-                <h4>{outMovements}$</h4>
-              </div>
-              <div className={classes.balance}>
-                <p>INTEREST</p>
-                <h4>{interest}$</h4>
-              </div>
-            </div>
-            <button onClick={sortHandler}>↓ SORT</button>
-          </div>
-          <p className={classes.logout}>
-            You will be logget out in <span>05:00</span>
-          </p>
-        </div>
+        <AccountBottomInfo
+          inMovements={inMovements}
+          outMovements={outMovements}
+          onSortHandler={sortHandler}
+        />
       </div>
     </Fragment>
   );

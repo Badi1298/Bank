@@ -38,13 +38,99 @@
   cursor: pointer;
 }
 
-.signout {
+.signout,
+.btn_add_money {
   border: none;
-  background-color: var(--color-primary);
+  background-color: transparent;
+  border: 2px solid #ccc;
   padding: 0.7rem 1.7rem;
   border-radius: 100px;
   font-family: inherit;
   font-size: 1.1rem;
   cursor: pointer;
   margin-right: 1.7rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.signout:hover {
+  background-color: #333;
+  border: 2px solid #333;
+  color: #fff;
+}
+
+.btn_add_money:hover {
+  background-color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  color: #fff;
+}
+
+.add_money {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.add_money h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0 auto 2rem;
+}
+
+.add_money form {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.add_money form label {
+  display: block;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+}
+
+.add_money form input {
+  width: 200px;
+  height: 27px;
+  border: none;
+  border-radius: 7px;
+  text-align: center;
+  font-family: inherit;
+  font-size: 1.1rem;
+  background-color: #fff;
+}
+
+.add_money form input:focus {
+  outline: none;
+}
+
+.add_money form input::-webkit-outer-spin-button,
+.add_money form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.title_highlight {
+  position: relative;
+  color: #333;
+}
+
+.title_highlight::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  z-index: -1;
+  background-image: var(--gradient-primary);
+  transform: scale(1.07, 1.05) skewX(-15deg);
 }

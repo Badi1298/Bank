@@ -1,31 +1,40 @@
 import classes from '../../styles/AccountNavigation.module.css';
 
-import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Image from 'next/image';
+
 import { authActions } from '../../store/auth';
+import Modal from '../UI/Modal';
+import TlcButton from '../UI/TlcButton';
 
 function AccountNavigation(props) {
-  const dispatch = useDispatch();
+  // Data
+  const [addMoney, setAddMoney] = useState(false);
 
-  const username = useSelector(state => state.auth.username);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const { isLoggedIn } = props;
 
   const userRef = useRef();
   const pinRef = useRef();
+  const amountToAdd = useRef();
 
-  const router = useRouter();
-
+  // Methods
   const backHome = () => {
-    router.push('/');
+    router.replace('/');
   };
 
   const signout = () => {
     dispatch(authActions.logout());
-    router.push('/account');
+    router.replace('/account');
   };
 
-  const isLoggedIn = props.isLoggedIn;
+  const toggleAddMoney = () => {
+    setAddMoney(prevState => (prevState = !prevState));
+  };
 
   const login = async e => {
     e.preventDefault();
@@ -52,10 +61,24 @@ function AccountNavigation(props) {
     props.onGoToAccount(data);
   };
 
+  const addMoneyHandler = e => {
+    e.preventDefault();
+
+    const amount = amountToAdd.current.value;
+
+    if (amount > 100000) {
+      alert('Not more than 100.000$');
+      return;
+    }
+
+    props.onAddDeposit(amount);
+    toggleAddMoney();
+  };
+
   return (
     <div className={classes.login}>
       {!isLoggedIn && <h1>Log in to get started</h1>}
-      {isLoggedIn && <h1>Welcome back, {username}</h1>}
+      {isLoggedIn && <h1>Welcome back!</h1>}
       <Image
         src="/logo-small.png"
         width="52.5"
@@ -72,9 +95,30 @@ function AccountNavigation(props) {
         </form>
       )}
       {isLoggedIn && (
-        <button className={classes.signout} onClick={signout}>
-          Signout
-        </button>
+        <div>
+          <button className={classes.btn_add_money} onClick={toggleAddMoney}>
+            Add Money
+          </button>
+          <button className={classes.signout} onClick={signout}>
+            Signout
+          </button>
+        </div>
+      )}
+      {addMoney && (
+        <Modal onClose={toggleAddMoney}>
+          <div className={classes.add_money}>
+            <h3>
+              Add <span className={classes.title_highlight}>Money</span>
+            </h3>
+            <form onSubmit={addMoneyHandler}>
+              <div>
+                <input type="number" ref={amountToAdd}></input>
+                <label>Amount</label>
+              </div>
+              <TlcButton type={'submit'} />
+            </form>
+          </div>
+        </Modal>
       )}
     </div>
   );

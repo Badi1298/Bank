@@ -19,6 +19,15 @@
   margin: 0.5rem 0 0 0;
 }
 
+.general_info button {
+  display: inline-block;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 .general_info p {
   font-size: 0.9rem;
   margin: 0;
@@ -37,69 +46,6 @@
   padding: 0.5rem 2rem;
   background-color: #fff;
   overflow-y: scroll;
-}
-
-.bottom_info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 1rem 0;
-}
-
-.bottom_info p {
-  margin: 0;
-}
-
-.balance_info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 540px;
-}
-
-.balance_info button {
-  border: none;
-  display: inline-block;
-  background-color: transparent;
-  margin: 0;
-  font-weight: 400;
-  font-size: 1rem;
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.in_out_interest {
-  display: flex;
-  gap: 1rem;
-}
-
-.balance {
-  display: flex;
-  gap: 0.3rem;
-}
-
-.balance p {
-  font-size: 0.9rem;
-  margin-top: 0.6rem;
-}
-
-.balance h4 {
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin: 0;
-  color: var(--color-primary);
-}
-
-.balance.out h4 {
-  color: var(--color-tertiary);
-}
-
-.logout {
-  font-size: 0.8rem;
-}
-
-.logout span {
-  font-weight: 600;
 }
 
 /* Scrollbar */

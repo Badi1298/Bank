@@ -1,9 +1,14 @@
 import classes from '../../../styles/AccountMovements.module.css';
 
 function AccountMovements(props) {
-  const { id, type, time, amount, count } = props;
+  const { type, time, amount, count } = props;
 
-  const typeClass = type === 'DEPOSIT' ? classes.deposit : classes.withdraw;
+  const typeClass =
+    type === 'DEPOSIT'
+      ? classes.deposit
+      : type === 'WITHDRAWAL'
+      ? classes.withdraw
+      : classes.received;
 
   return (
     <div className={classes.movement}>

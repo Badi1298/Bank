@@ -15,11 +15,11 @@
   width: 415px;
   height: 150px;
   border-radius: 10px;
-  background-image: var(--gradient-secondary);
+  background-image: var(--gradient-primary);
 }
 
 .loan {
-  background-image: var(--gradient-primary);
+  background-image: var(--gradient-secondary);
 }
 
 .close {
