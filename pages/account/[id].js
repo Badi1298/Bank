@@ -17,8 +17,8 @@ function UserAccount(props) {
   const router = useRouter();
   const userId = router.query.id;
 
-  props.movementData.reverse();
-  const movementsAmounts = props.movementData.map(movement => movement.amount);
+  props.movementsData.reverse();
+  const movementsAmounts = props.movementsData.map(movement => movement.amount);
   const currentBalance = movementsAmounts.reduce((acc, mov) => acc + mov, 0);
   const inMovements = movementsAmounts
     .filter(mov => mov > 0)
@@ -28,7 +28,7 @@ function UserAccount(props) {
     .reduce((acc, mov) => acc + mov, 0)
     .toString()
     .slice(1);
-  const sortedMovements = [...props.movementData].sort(
+  const sortedMovements = [...props.movementsData].sort(
     (a, b) => b.amount - a.amount
   );
 
@@ -128,7 +128,7 @@ function UserAccount(props) {
         <div className={classes.inner_container}>
           <div className={classes.movements}>
             {!sortDescending
-              ? props.movementData.map(movement => (
+              ? props.movementsData.map(movement => (
                   <AccountMovements
                     key={movement.id}
                     id={movement.id}
@@ -198,20 +198,21 @@ export async function getStaticProps(context) {
 
   const accountsCollection = db.collection('accounts');
 
-  const accounts = await accountsCollection.find({ userId: userId }).toArray();
+  const accounts = await accountsCollection.find().toArray();
+  const correctAccounts = accounts.filter(acc => acc.userId === userId);
 
   client.close();
 
   return {
     props: {
-      movementData: accounts.map(account => ({
+      movementsData: correctAccounts.map(account => ({
         id: account._id.toString(),
         type: account.type,
         amount: account.amount,
         time: account.time,
       })),
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 }
 
