@@ -17,7 +17,7 @@ function UserAccount(props) {
   const router = useRouter();
   const userId = router.query.id;
 
-  props.movementsData.reverse();
+  // props.movementsData.reverse();
   const movementsAmounts = props.movementsData.map(movement => movement.amount);
   const currentBalance = movementsAmounts.reduce((acc, mov) => acc + mov, 0);
   const inMovements = movementsAmounts
@@ -172,16 +172,12 @@ export async function getStaticPaths() {
 
   const accountsCollection = db.collection('accounts');
 
-  const accounts = await accountsCollection
-    .find({}, { userId: 1, _id: 0 })
-    .toArray();
-
-  const uniqueAccounts = [...new Set(accounts)];
+  const accounts = await accountsCollection.find().toArray();
 
   client.close();
 
   return {
-    paths: uniqueAccounts.map(account => ({
+    paths: accounts.map(account => ({
       params: { id: account.userId },
     })),
     fallback: 'blocking',
