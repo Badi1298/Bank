@@ -13,11 +13,9 @@ function AccountMovements(props) {
   return (
     <div className={classes.movement}>
       <div className={classes.type_time}>
-        <span className={typeClass}>
-          <p>
-            {count} {type}
-          </p>
-        </span>
+        <p className={typeClass}>
+          {count} {type}
+        </p>
         <p className={classes.time}>{time}</p>
       </div>
       <h3>{amount}$</h3>
