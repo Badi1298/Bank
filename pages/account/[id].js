@@ -12,7 +12,7 @@ import AccountBottomInfo from '../../componenets/main-page/account/AccountBottom
 function UserAccount(props) {
   // Data
   const [sortDescending, setSortDescending] = useState(false);
-  const date = new Date();
+  const [date, setDate] = useState(new Date());
 
   const router = useRouter();
   const userId = router.query.id;
@@ -114,12 +114,10 @@ function UserAccount(props) {
       <div className={classes.container}>
         <div className={classes.general_info}>
           <div>
-            <h2>
-              Current balance{' '}
-              <button onClick={refresh} className={classes.refresh}>
-                ⟳
-              </button>
-            </h2>
+            <div className={classes.refresh}>
+              <h2>Current balance </h2>
+              <button onClick={refresh}>⟳</button>
+            </div>
             <p>
               As of{' '}
               {`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}
