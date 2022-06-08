@@ -17,7 +17,6 @@ function UserAccount(props) {
   const router = useRouter();
   const userId = router.query.id;
 
-  // props.movementsData.reverse();
   const movementsAmounts = props.movementsData.map(movement => movement.amount);
   const currentBalance = movementsAmounts.reduce((acc, mov) => acc + mov, 0);
   const inMovements = movementsAmounts
@@ -195,7 +194,9 @@ export async function getStaticProps(context) {
   const accountsCollection = db.collection('accounts');
 
   const accounts = await accountsCollection.find().toArray();
-  const correctAccounts = accounts.filter(acc => acc.userId === userId);
+  const correctAccounts = accounts
+    .filter(acc => acc.userId === userId)
+    .reverse();
 
   client.close();
 
