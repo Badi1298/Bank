@@ -13,6 +13,7 @@
   --color-border: #c0c0c0;
   --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
+  --gradient-tertiary: linear-gradient(to top left, #e52a5a, #ff585f);
 }
 
 html,

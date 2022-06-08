@@ -1,0 +1,74 @@
+.tlc {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.transfer,
+.loan,
+.close {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2.5rem;
+  width: 415px;
+  height: 150px;
+  border-radius: 10px;
+  background-image: var(--gradient-secondary);
+}
+
+.loan {
+  background-image: var(--gradient-primary);
+}
+
+.close {
+  background-image: var(--gradient-tertiary);
+}
+
+.transfer h3,
+.loan h3,
+.close h3 {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: 1.05rem;
+  width: 335px;
+  margin: 0 auto 0.9rem;
+}
+
+.transfer form,
+.loan form,
+.close form {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.transfer form label,
+.loan form label,
+.close form label {
+  display: block;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+.transfer form input,
+.loan form input,
+.close form input {
+  width: 130px;
+  height: 27px;
+  border: none;
+  border-radius: 7px;
+  text-align: center;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.transfer form input:focus,
+.loan form input:focus,
+.close form input:focus {
+  outline: none;
+}

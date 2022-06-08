@@ -1,10 +1,12 @@
 import classes from '../../../styles/Account.module.css';
-import Link from 'next/link';
+
 import { Fragment } from 'react';
+import Link from 'next/link';
+
 import useForm from '../../../hooks/use-form';
 
 const notEmpty = value => value.trim() !== '';
-const notEmptyAnd4Digit = value => value.trim() !== '' && value.length === 4;
+const notEmptyAnd4Digit = value => value.trim() !== '' && value.length === 6;
 
 function AccountForm(props) {
   const {
@@ -37,16 +39,33 @@ function AccountForm(props) {
     formIsValid = true;
   }
 
-  const submitForm = e => {
+  const submitForm = async e => {
     e.preventDefault();
 
     if (!formIsValid) return;
 
-    const account = {
-      firstName: enteredFirstName,
-      lastName: enteredLastName,
-      pin: enteredPin,
-    };
+    const email = `${enteredFirstName
+      .slice(0, 1)
+      .toLowerCase()}${enteredLastName.slice(0, 1).toLowerCase()}@bankist.com`;
+
+    const res = await fetch(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA0-Nt2nWala7-ChK6KdUQr_GRL2qBSRmE',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email,
+          password: enteredPin,
+          returnSecureToken: true,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (!res.ok) return;
+
+    await res.json();
 
     props.onClose();
   };
@@ -106,7 +125,7 @@ function AccountForm(props) {
             <input
               id="pin"
               type="text"
-              placeholder="4 digit PIN"
+              placeholder="6 digit PIN"
               value={enteredPin}
               onChange={pinChangeHandler}
               onBlur={focusPin}
@@ -114,10 +133,17 @@ function AccountForm(props) {
             />
             {pinIsInvalid && (
               <p className={classes.error_text}>
-                PIN has to have exacly 4 digits!
+                PIN has to have exacly 6 digits!
               </p>
             )}
           </div>
+          <p className={classes.explanation}>
+            The created email will have the first letters of your first and last
+            name followed by @bankist.com
+            <br />
+            <br />
+            Example: Serban David - sd@bankist.com
+          </p>
           <button
             type="submit"
             disabled={!formIsValid}
@@ -131,7 +157,10 @@ function AccountForm(props) {
         ×
       </button>
       <p className={classes.para}>
-        Already have an account? <Link href="/account">Click here</Link>{' '}
+        Already have an account?{' '}
+        <Link href="/account">
+          <span className={classes.click_here}>Click here</span>
+        </Link>{' '}
         instead.
       </p>
     </Fragment>

@@ -7,9 +7,9 @@
 .list {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
   list-style-type: none;
-  margin-right: 6rem;
+  margin-right: 3rem;
   margin-top: 1.7rem;
 }
 
@@ -25,15 +25,23 @@
 .account_button {
   border: none;
   background-color: var(--color-primary);
-  padding: 0.7rem 1.7rem;
+  width: 170px;
+  height: 50px;
   border-radius: 100px;
   font-family: inherit;
   font-size: 1.1rem;
   cursor: pointer;
 }
 
+.login {
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
 .logo {
   margin-left: 5.6rem;
   margin-top: 1.4rem;
-  cursor: pointer;
 }

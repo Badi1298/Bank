@@ -1,7 +1,7 @@
 import classes from '../../../styles/AccountMovements.module.css';
 
 function AccountMovements(props) {
-  const { id, type, time, amount } = props;
+  const { id, type, time, amount, count } = props;
 
   const typeClass = type === 'DEPOSIT' ? classes.deposit : classes.withdraw;
 
@@ -10,12 +10,12 @@ function AccountMovements(props) {
       <div className={classes.type_time}>
         <span className={typeClass}>
           <p>
-            {id} {type}
+            {count} {type}
           </p>
         </span>
         <p className={classes.time}>{time}</p>
       </div>
-      <h3>{amount}</h3>
+      <h3>{amount}$</h3>
     </div>
   );
 }

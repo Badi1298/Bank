@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 import MainNavigation from '../componenets/layout/MainNavigation';
 import Home from '../componenets/main-page/Home';
@@ -8,14 +8,26 @@ import Testimonials from '../componenets/main-page/testimonials/Testimonials';
 import MainFooter from '../componenets/layout/MainFooter';
 
 function HomePage() {
+  const [accountModalOpen, setAccountModalOpen] = useState(false);
+
+  const toggleAccountModal = () => {
+    setAccountModalOpen(prevState => (prevState = !prevState));
+  };
+
   return (
     <Fragment>
-      <MainNavigation />
+      <MainNavigation
+        onToggleAccountModal={toggleAccountModal}
+        accountModalOpen={accountModalOpen}
+      />
       <Home />
       <Features />
       <Operations />
       <Testimonials />
-      <MainFooter />
+      <MainFooter
+        onToggleAccountModal={toggleAccountModal}
+        accountModalOpen={accountModalOpen}
+      />
     </Fragment>
   );
 }

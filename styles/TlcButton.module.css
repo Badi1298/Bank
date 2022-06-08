@@ -1,0 +1,15 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 1.3rem;
+  width: 45px;
+  height: 26px;
+  padding-bottom: 4px;
+  background-color: #fff;
+  transform: translateY(0.5px);
+  cursor: pointer;
+}
