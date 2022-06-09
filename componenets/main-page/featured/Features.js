@@ -6,14 +6,8 @@ import InfoLeft from './InfoLeft';
 import { useEffect, useRef } from 'react';
 
 function Features(props) {
-  const features = useRef(null);
-
-  useEffect(() => {
-    props.onFeatures(features.current, 'features');
-  }, []);
-
   return (
-    <section className={classes.section} ref={features}>
+    <section className={classes.section}>
       <SectionTitle
         title="FEATURES"
         description="Everything you need in a modern bank and more."

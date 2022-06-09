@@ -2,6 +2,13 @@ import classes from '../../styles/Home.module.css';
 import Image from 'next/image';
 
 function Home() {
+  const learnMore = () => {
+    scrollTo({
+      top: 902,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className={classes.outer}>
       <div className={classes.container}>
@@ -12,7 +19,7 @@ function Home() {
             <span className={classes.title_highlight}>minimalist</span>
           </h1>
           <p>A simpler banking experience for a simpler life</p>
-          <button>Learn more &#x2193;</button>
+          <button onClick={learnMore}>Learn more &#x2193;</button>
         </div>
         <Image
           src="/hero.png"
