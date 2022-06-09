@@ -21,9 +21,30 @@ function MainNavigation(props) {
           <Image src="/logo.png" alt="Bankist" width="148.58" height="45" />
         </div>
         <ul className={classes.list}>
-          <li>Features</li>
-          <li>Operations</li>
-          <li>Testimonials</li>
+          <li>
+            <button
+              className={classes.list_btn}
+              onClick={props.onScrollToFeatures}
+            >
+              Features
+            </button>
+          </li>
+          <li>
+            <button
+              className={classes.list_btn}
+              onClick={props.onScrollToOperations}
+            >
+              Operations
+            </button>
+          </li>
+          <li>
+            <button
+              className={classes.list_btn}
+              onClick={props.onScrollToTestimonials}
+            >
+              Testimonials
+            </button>
+          </li>
           <li>
             <button
               onClick={props.onToggleAccountModal}

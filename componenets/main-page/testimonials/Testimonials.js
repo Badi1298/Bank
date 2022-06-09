@@ -1,11 +1,17 @@
 import classes from '../../../styles/Testimonials.module.css';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import SectionTitle from '../../layout/SectionTitle';
 
-function Testimonials() {
+function Testimonials(props) {
+  const testimonialsRef = useRef(null);
+
+  useEffect(() => {
+    props.onTestimonials(testimonialsRef.current, 'testimonials');
+  }, []);
+
   const testimonials = useSelector(state => state.testimonials);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -26,7 +32,7 @@ function Testimonials() {
   };
 
   return (
-    <section className={classes.section}>
+    <section className={classes.section} ref={testimonialsRef}>
       <SectionTitle
         title="NOT SURE YET?"
         description="Millions of Bankists are already making their lives simpler."
