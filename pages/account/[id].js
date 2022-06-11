@@ -12,7 +12,15 @@ import AccountBottomInfo from '../../componenets/main-page/account/AccountBottom
 function UserAccount(props) {
   // Data
   const [sortDescending, setSortDescending] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [transactionInProgress, setTransactionInProgress] = useState(false);
+  const [transactionSuccesful, setTransactionSuccesful] = useState(false);
+  const [loanInProgress, setLoanInProgress] = useState(false);
+  const [loanSuccessful, setLoanSuccessful] = useState(false);
+
+  const date = new Date();
+  const currentDate = `${date.getDate()}/${
+    date.getMonth() + 1
+  }/${date.getFullYear()}`;
 
   const router = useRouter();
   const userId = router.query.id;
@@ -65,6 +73,7 @@ function UserAccount(props) {
 
   const addDeposit = async function (amount) {
     const email = await getEmail();
+    setLoanInProgress(true);
 
     const res = await fetch('/api/add-money', {
       method: 'POST',
@@ -80,13 +89,21 @@ function UserAccount(props) {
       },
     });
 
-    const data = await res.json();
+    if (!res.ok) return;
 
-    console.log(data);
+    await res.json();
+
+    setLoanInProgress(false);
+    setLoanSuccessful(true);
+
+    setTimeout(() => {
+      setLoanSuccessful(false);
+    }, 2000);
   };
 
   const transferMoney = async function (toEmail, transferAmount) {
     const email = await getEmail();
+    setTransactionInProgress(true);
 
     const res = await fetch('/api/transfer-money', {
       method: 'POST',
@@ -102,9 +119,16 @@ function UserAccount(props) {
       },
     });
 
-    const data = await res.json();
+    if (!res.ok) return;
 
-    console.log(data);
+    await res.json();
+
+    setTransactionInProgress(false);
+    setTransactionSuccesful(true);
+
+    setTimeout(() => {
+      setTransactionSuccesful(false);
+    }, 2000);
   };
 
   return (
@@ -117,10 +141,7 @@ function UserAccount(props) {
               <h2>Current balance </h2>
               <button onClick={refresh}>⟳</button>
             </div>
-            <p>
-              As of{' '}
-              {`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}
-            </p>
+            <p>As of {currentDate}</p>
           </div>
           <h1>{currentBalance} USD($)</h1>
         </div>
@@ -151,6 +172,10 @@ function UserAccount(props) {
           <AccountTlc
             onTransferMoney={transferMoney}
             onLoanMoney={addDeposit}
+            transactionInProgress={transactionInProgress}
+            transactionSuccesful={transactionSuccesful}
+            loanInProgress={loanInProgress}
+            loanSuccessful={loanSuccessful}
           />
         </div>
         <AccountBottomInfo

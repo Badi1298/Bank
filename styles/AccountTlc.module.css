@@ -7,6 +7,7 @@
 .transfer,
 .loan,
 .close {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,4 +72,8 @@
 .loan form input:focus,
 .close form input:focus {
   outline: none;
+}
+
+.transaction_feedback {
+  font-weight: 400;
 }
