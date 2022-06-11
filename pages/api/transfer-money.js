@@ -18,21 +18,22 @@ async function handler(req, res) {
       { _id: 0, userId: 1 }
     );
 
-    await accountsCollection.insertOne({
-      email: fromEmail,
-      userId: fromUserId,
-      amount: -amount,
-      type: 'WITHDRAWAL',
-      time: time,
-    });
-
-    await accountsCollection.insertOne({
-      email: toEmail,
-      userId: userId,
-      amount: amount,
-      type: 'RECEIVED',
-      time: time,
-    });
+    await accountsCollection.insertMany([
+      {
+        email: fromEmail,
+        userId: fromUserId,
+        amount: -amount,
+        type: 'WITHDRAWAL',
+        time: time,
+      },
+      {
+        email: toEmail,
+        userId: userId,
+        amount: amount,
+        type: 'RECEIVED',
+        time: time,
+      },
+    ]);
 
     client.close();
 
